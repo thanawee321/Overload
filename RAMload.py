@@ -32,11 +32,15 @@ def main():
         
             if current_ramUsage < target_usage:
                 array_block.append(bytearray(int(chunk_size)))
-                print(f"\r [{current_time}] | Percent Usage: {round(current_ramUsage)}% | RAM Usage: {current_memory:.2f}MB | Insert stack {chunk_size / (1024 * 1024 ):.3f} MB")
-            
+                sys.stdout.write('\r' + ' ' * 80 + '\r')
+                sys.stdout.write(f"\r [{current_time}] | Percent Usage: {round(current_ramUsage)}% | RAM Usage: {current_memory:.2f}MB | Insert stack {chunk_size / (1024 * 1024 ):.3f} MB")
+                sys.stdout.flush()
+                
             if current_ramUsage == target_usage:
                 for i in range(30,-1,-1):
-                    print(f"Hole ram usage at {current_ramUsage}% ({i})")
+                    sys.stdout.write('\r' + ' ' * 80 + '\r')
+                    sys.stdout.write(f"Hole ram usage at {current_ramUsage}% ({i})")
+                    sys.stdout.flush()
                     time.sleep(1)
                 array_block.clear()
                 
@@ -75,7 +79,7 @@ def main():
             minutes = int((elapsed_time % 3600) // 60)
             seconds = int(elapsed_time % 60)
             
-            print(f"Start Time: {start_time} -> End Time: {end_time} = {hours}:{minutes}:{seconds}")
+            print(f"Start Time: {start_time} -> End Time: {end_time} = {hours:02d}:{minutes:02d}:{seconds:02d}")
         else:
             print(f"Start Time: {start_time} -> End Time: Running...") 
         
